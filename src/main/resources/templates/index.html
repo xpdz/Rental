@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="#{index.title}">Rental</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+<div th:include="header::topNav"></div>
+
+<div class="bg"></div>
+<div class="jumbotron vertical-center">
+  <div class="container">
+    <div class="row">
+      <form role="form" th:action="@{/rooms}" method="get">
+        <div class="col-lg-6 col-lg-offset-2">
+          <input name="searchText" type="text" class="form-control input-lg" placeholder="City, State or ZIP" autofocus="true" />
+        </div>
+        <div class="col-lg-2">
+          <button id="btnSubmit" class="btn btn-lg btn-primary" type="submit">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+  <!--<div class="container">-->
+
+    <div th:include="footer::footer"></div>
+  <!--</div>-->
+</body>
+</html>
