@@ -1,0 +1,143 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="#{roomForm.title}">Post a room</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+  <div th:include="header::topNav"></div>
+
+  <div class="container">
+    <form action="/rooms" method="post">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <label for="roomTitle">Title</label>
+          <input type="text" class="form-control" id="roomTitle" required="true" placeholder="Enter title" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <label for="roomLocation">Location</label>
+          <input type="text" class="form-control" id="roomLocation" required="true" placeholder="Enter location" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+          <label for="roomPrice">Price</label>
+          <input type="text" class="form-control" id="roomPrice" placeholder="Enter price" />
+        </div>
+        <div class="col-md-3">
+          <label for="startDate">Start Date</label>
+          <input type="text" class="form-control" id="startDate" />
+        </div>
+        <div class="col-md-3">
+          <label for="endDate">End Date</label>
+          <input type="text" class="form-control" id="endDate" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+          <label for="roomType">Property Type</label>
+          <select id="roomType">
+            <option value=""></option>
+            <option value="0">Apartment</option>
+            <option value="1">Townhouse</option>
+            <option value="2">House</option>
+            <option value="3">Condo</option>
+            <option value="4">Other</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="roomLessor">Lessor Identity</label>
+          <select id="roomLessor">
+            <option value=""></option>
+            <option value="0">Roomate</option>
+            <option value="1">Owner</option>
+            <option value="2">Broker</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="roomTerm">Term of Lease</label>
+          <select id="roomTerm">
+            <option value=""></option>
+            <option value="0">12 months leases</option>
+            <option value="1">6 months leases</option>
+            <option value="2">3 months leases</option>
+            <option value="3">Month to month</option>
+            <option value="4">Contact for negotiation</option></select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+          <label for="room4Rent">Room for Rent</label>
+          <select id="room4Rent">
+            <option value=""></option>
+            <option value="0">Private Bedroom</option>
+            <option value="1">Living Room</option>
+            <option value="2">Entire Home</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="gender">Gender Prefer</label>
+          <select id="gender">
+            <option value="0">Either</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="petAllowed">Allow Pet</label>
+          <select id="petAllowed">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-3">
+          <label for="bedroomCount">Bedroom</label>
+          <input type="text" class="form-control" id="bedroomCount" />
+        </div>
+        <div class="col-md-2">
+          <label for="livingRoomCount">Living Room</label>
+          <input type="text" class="form-control" id="livingRoomCount" />
+        </div>
+        <div class="col-md-2">
+          <label for="bathroomCount">Bathroom</label>
+          <input type="text" class="form-control" id="bathroomCount" />
+        </div>
+        <div class="col-md-2">
+          <label for="totalMembers">Total Members</label>
+          <input type="text" class="form-control" id="totalMembers" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1 col-md-offset-3">
+          <label for="description">Description</label>
+          <textarea id="description" class="form-control" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <button type="button" class="btn btn-primary">Post</button>
+        </div>
+      </div>
+    </form>
+
+    <div th:include="footer::footer"></div>
+  </div>
+</body>
+</html>

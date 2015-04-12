@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title th:text="rooms.title">Rooms</title>
+  <title th:text="#{rooms.title}">Rooms</title>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -16,25 +16,70 @@
   <![endif]-->
   <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+  <style type="text/css">
+    html { height: 100% }
+    body { height: 100%; margin: 0; padding: 0 }
+    #map_canvas { height: 100% }
+  </style>
+  <script src="http://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&amp;sensor=SET_TO_TRUE_OR_FALSE"></script>
+  <script>
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(-34.397, 150.644),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+      }
+  </script>
 </head>
-<body>
+<body onload="initialize()">
 <div class="container">
   <div th:include="header::topNav"></div>
 
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <form action="/rooms" method="get">
+          <div class="col-md-3">
+            <label for="state">State</label>
+            <input type="text" class="form-control" id="state" placeholder="Enter state" />
+          </div>
+          <div class="col-md-3">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" placeholder="Enter price" />
+          </div>
+          <div class="col-md-3">
+            <label for="roomType">Type</label>
+            <input type="text" class="form-control" id="roomType" placeholder="Enter room type" />
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-primary" type="submit">
+              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <div class="row">
-    <form role="form" th:action="@{/rooms}" method="get">
-      <div class="col-md-4">
-        <input name="searchText" type="text" class="form-control input-lg" placeholder="filter1" />
+    <div class="col-md-3">
+      <div class="row">
+        room 1
       </div>
-      <div class="col-md-4">
-        <input name="searchText" type="text" class="form-control input-lg" placeholder="filter2" />
+      <div class="row">
+        room 2
       </div>
-      <div class="col-md-4">
-        <button id="btnSubmit" class="btn btn-lg btn-primary" type="submit">
-          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        </button>
+      <div class="row">
+        room 3
       </div>
-    </form>
+    </div>
+    <div class="col-md-9">
+      <!--<div id="map_canvas" style="width:100%; height:100%"></div>-->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d25240.78568066587!2d-122.43924208508302!3d37.74084014250959!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1szh-CN!2sus!4v1428848537962" width="800" height="600" frameborder="0" style="border:0"></iframe>
+    </div>
   </div>
 
   <div th:include="footer::footer"></div>

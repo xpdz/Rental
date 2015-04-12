@@ -18,16 +18,21 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div th:fragment="topNav" class="row">
-    <div class="col-md-1">
-      <img src="images/logo1.jpg" class="img-responsive" />
-    </div>
-    <div class="col-md-2 col-md-offset-10">
-      <div class="clo-md-1">
-        <a href="/login" th:text="#{header.login}">Login</a> or <a href="/singup" th:text="#{header.singup}">Sign up</a>
-      </div>
-      <div class="col-md-1">
-        <a class="btn btn-default" href="/rooms/form" role="button" th:text="#{header.postRoom}">Post a room</a>
+  <div th:fragment="topNav">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1">
+          <a href="/"><img src="images/logo.png" class="img-responsive" /></a>
+        </div>
+        <div class="col-md-2">
+          <div class="btn-group" role="group">
+            <a class="btn btn-info" href="/rooms/form" role="button" th:text="#{header.postRoom}">Post a room</a>
+            <a class="btn btn-info" href="/wants/form" role="button" th:text="#{header.postWant}">Post a want</a>
+          </div>
+        </div>
+        <div class="col-md-2 col-md-offset-9">
+          <a href="/login" th:text="#{header.login}">Login</a> / <a href="/singup" th:text="#{header.singup}">Sign up</a>
+        </div>
       </div>
     </div>
   </div>

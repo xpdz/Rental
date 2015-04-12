@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import rental.domain.Room;
 import rental.service.RoomRepository;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -64,7 +65,7 @@ public class RoomController {
 
     @RequestMapping(value = "/{room}", method = RequestMethod.PUT)
     @Secured("ROLE_USER")
-    public String editRoom(@ModelAttribute Room room, BindingResult result) {
+    public String editRoom(@Valid Room room, BindingResult result) {
         if (result.hasErrors()) {
             return "room_form";
         }
