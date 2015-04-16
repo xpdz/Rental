@@ -11,9 +11,7 @@ public class Post {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne
-    @JoinColumn(name="account_id")
-    private Account account;
+    private long accountId;
     private Date lastModified;
 
     public Long getId() {
@@ -24,12 +22,12 @@ public class Post {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
+    public long getAccountId() {
+        return accountId;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 
     public Date getLastModified() {

@@ -22,3 +22,5 @@
   display: flex;
   align-items: center;
 }
+
+.top-buffer { margin-top:20px; }

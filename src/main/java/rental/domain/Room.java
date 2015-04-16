@@ -13,7 +13,7 @@ public class Room extends Post implements Serializable {
     private int price;
     private Date startDate;
     private Date toDate;
-    private String type;
+    private String roomType;
     private String count;
     private String gender;
     private boolean petAllowed;
@@ -72,12 +72,12 @@ public class Room extends Post implements Serializable {
         this.toDate = toDate;
     }
 
-    public String getType() {
-        return type;
+    public String getRoomType() {
+        return roomType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
     }
 
     public String getCount() {
