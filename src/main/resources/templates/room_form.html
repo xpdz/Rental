@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css" />
+  <link rel="stylesheet" href="/css/site.css" />
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -15,7 +17,18 @@
   <![endif]-->
   <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/css/site.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#datepicker').datepicker({
+        format: "yyyymmdd",
+        clearBtn: true,
+        autoclose: true,
+        todayHighlight: true
+      });
+    });
+  </script>
 </head>
 <body>
   <div th:include="header::topNav"></div>
@@ -43,13 +56,14 @@
                     <label for="roomPrice">Price</label>
                     <input type="text" class="form-control" id="roomPrice" name="price" placeholder="Enter price" />
                   </div>
-                  <div class="col-md-4">
-                    <label for="startDate">Start Date</label>
-                    <input type="text" class="form-control" id="startDate" name="startDate" />
-                  </div>
-                  <div class="col-md-4">
-                    <label for="endDate">End Date</label>
-                    <input type="text" class="form-control" id="endDate" name="endDate" />
+                  <div class="col-md-8">
+                    <label for="datepicker">Date</label>
+                    <div class="input-daterange input-group" id="datepicker">
+                      <span class="input-group-addon">From</span>
+                      <input type="text" class="input-sm form-control" name="startDate" />
+                      <span class="input-group-addon">To</span>
+                      <input type="text" class="input-sm form-control" name="endDate" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -150,8 +164,6 @@
         </div>
       </div>
     </div>
-
-
     <div th:include="footer::footer"></div>
   </div>
 </body>

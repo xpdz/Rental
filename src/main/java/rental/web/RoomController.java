@@ -41,7 +41,7 @@ public class RoomController {
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     @Secured("ROLE_USER")
-    public String showRoomsForm(Room room) {
+    public String showRoomForm(Room room) {
         return "room_form";
     }
 
@@ -66,8 +66,8 @@ public class RoomController {
             return "room_form";
         }
 
-        Account account = accountRepository.findByUsername(principal.getUsername());
-        room.setAccountId(account.getId());
+//        Account account = accountRepository.findByUsername(principal.getUsername());
+//        room.setAccountId(account.getId());
         room.setLastModified(new Date());
         roomRepository.save(room);
         return "room_list";

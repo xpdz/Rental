@@ -26,8 +26,24 @@
         </div>
         <div class="col-md-2">
           <div class="btn-group" role="group">
-            <a class="btn btn-info" href="/rooms/form" role="button" th:text="#{header.postRoom}">Post a room</a>
-            <a class="btn btn-info" href="/wants/form" role="button" th:text="#{header.postWant}">Post a want</a>
+            <div class="btn-group">
+              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" th:text="#{header.rooms}">
+                Rooms <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/rooms" th:text="#{header.room.list}">Rooms list</a></li>
+                <li><a href="/rooms/form" th:text="#{header.room.post}">Post a room</a></li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" th:text="#{header.wants}">
+                Wants <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/wants" th:text="#{header.want.list}">Wants list</a></li>
+                <li><a href="/wants/form" th:text="#{header.want.post}">Post a want</a></li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="col-md-2 col-md-offset-9">
