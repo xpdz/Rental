@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,8 +68,11 @@ public class RoomController {
             return "room_form";
         }
 
-//        Account account = accountRepository.findByUsername(principal.getUsername());
-//        room.setAccountId(account.getId());
+        String username = ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        Account account = accountRepository.findByUsername(username);
+        logger.info("==rental== User " + username + " post a room.");
+        room.setAccountId(account.getId());
+
         room.setLastModified(new Date());
         roomRepository.save(room);
         return "room_list";

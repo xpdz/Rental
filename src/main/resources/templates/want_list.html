@@ -25,21 +25,25 @@
     <div class="row">
       <div class="col-md-8 col-md-offsets-4">
         <div class="row" th:each="want : ${wants}">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-md-3" th:text="${want.accountId}"></div>
-              <div class="col-md-3 col-md-offset-6" th:text="${want.lastModified}"></div>
-            </div>
-          </div>
           <div class="panel panel-default">
-            <div class="row">
-              <div class="col-md-3" th:text="${want.address}"></div>
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-md-3" th:text="${want.accountId}"></div>
+                <h5 class="col-md-3 col-md-offset-6" th:text="${want.lastModified}"></h5>
+              </div>
             </div>
-            <div class="row">
-              <div class="col-md-3 col-md-offset-6" th:text="${want.price}"></div>
-            </div>
-            <div class="row">
-              <div class="panel-body" th:text="${want.description}"></div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-10">
+                  <h3 th:text="${want.address}"></h3>
+                </div>
+                <div class="col-md-2">
+                  <h3 th:text="'$' + ${want.price}"></h3>
+                </div>
+              </div>
+              <div class="row">
+                <h5 class="panel-body" th:text="${want.description}"></h5>
+              </div>
             </div>
           </div>
         </div>
