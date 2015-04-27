@@ -15,12 +15,30 @@ public class Post {
     private long accountId;
     private Date lastModified;
     private String address;
+    private double lat;
+    private double lng;
     private int price;
     private Date startDate;
     private Date endDate;
     private String roomType;
     private String gender;
     private String description;
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
 
     public String getAddress() {
         return address;
