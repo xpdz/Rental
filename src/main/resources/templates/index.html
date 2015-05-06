@@ -16,33 +16,35 @@
   <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="css/site.css"/>
+  <script>
+    $(document).ready(function() {
+      $('.navbar-form').hide();
+    });
+  </script>
 </head>
 <body>
-  <div class="container">
-    <div th:include="header::topNav"></div>
-  </div>
+  <div class="bg"></div>
 
-<div class="bg"></div>
-<div class="jumbotron vertical-center">
-  <div class="container">
-    <div class="row">
-      <form role="form" th:action="@{/rooms}" method="get">
-        <div class="col-lg-6 col-lg-offset-2">
-          <div class="input-group input-group-lg">
-            <input type="text" name="searchBox" class="form-control" placeholder="City, State or ZIP" autofocus="true"/>
-            <span class="input-group-btn" id="basic-addon1">
-              <button class="btn btn-lg btn-primary" type="submit">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-              </button>
-            </span>
+  <div th:include="header::topNav"></div>
+  <div class="jumbotron vertical-center">
+    <div class="container">
+      <div class="row">
+        <form role="form" th:action="@{/rooms}" method="get">
+          <div class="col-lg-6 col-lg-offset-2">
+            <div class="input-group input-group-lg">
+              <input type="text" name="searchBox" class="form-control" placeholder="City, State or ZIP" autofocus="true"/>
+              <span class="input-group-btn" id="basic-addon1">
+                <button class="btn btn-lg btn-primary" type="submit">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+              </span>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<div th:include="footer::footer"></div>
-<!--</div>-->
+  <div th:include="footer::footer"></div>
 </body>
 </html>

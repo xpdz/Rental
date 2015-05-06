@@ -47,6 +47,7 @@ public class RoomController {
     public String listRooms(Model model) {
         List<Room> rooms = roomRepository.findAll();
         model.addAttribute("rooms", rooms);
+        logger.info(":::Find all rooms, size="+rooms.size());
         return "room_list";
     }
 
@@ -60,6 +61,7 @@ public class RoomController {
     public String showRoom(@PathVariable Long id, Model model) {
         Room room = roomRepository.findOne(id);
         model.addAttribute("room", room);
+        logger.info(":::Show room detail, roomID="+id);
         return "room_detail";
     }
 
@@ -79,7 +81,7 @@ public class RoomController {
 
         String username = ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         Account account = accountRepository.findByUsername(username);
-        logger.info("==rental== User " + username + " post a room.");
+        logger.info(":::Post room, user=" + username);
         room.setAccountId(account.getId());
 
         resolveGeocoding(room);
@@ -91,11 +93,11 @@ public class RoomController {
 
     private void resolveGeocoding(Room room) {
         String url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + room.getAddress() + "&sensor=false";
-        ResponseEntity<String> entity = null;
+        ResponseEntity<String> entity;
         try {
             entity = new RestTemplate().getForEntity(url, String.class);
         } catch (Exception e) {
-            logger.info("Get Google api failed, retry with proxy, exption: " + e);
+            logger.info(":::Get Google api failed, retry with proxy, exption: " + e);
             SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
             Proxy proxy= new Proxy(Proxy.Type.HTTP, new InetSocketAddress("3.87.248.1", 88));
             requestFactory.setProxy(proxy);
@@ -104,24 +106,26 @@ public class RoomController {
         HttpStatus status = entity.getStatusCode();
         if (status.is2xxSuccessful()) {
             ObjectMapper mapper = new ObjectMapper();
-            JsonNode jsonNode = null;
+            JsonNode jsonNode;
             try {
                 jsonNode = mapper.readTree(entity.getBody());
             } catch (IOException e) {
-                logger.info("Parse json failed, exption: " + e);
+                logger.info(":::Parse json failed, exption: " + e);
                 return;
             }
             String googleStatus = jsonNode.get("status").asText();
             if ("OK".equals(googleStatus)) {
                 JsonNode latlng = jsonNode.get("results").get(0).get("geometry").get("location");
                 double lat = latlng.get("lat").asDouble();
+                room.setLat(lat);
                 double lng = latlng.get("lng").asDouble();
-                logger.info("Got Geocoding from Google, Lat: " + lat + ", Lng: " + lng);
+                room.setLat(lng);
+                logger.info(":::Got Geocoding from Google, Lat: " + lat + ", Lng: " + lng);
             } else {
-                logger.error("Google Geocoding return status other than OK, the status is: " + googleStatus);
+                logger.error(":::Google Geocoding return status other than OK, the status is: " + googleStatus);
             }
         } else {
-            logger.error("Error while parse address to geocoding, the status is: " + status);
+            logger.error(":::Error while parse address to geocoding, the status is: " + status);
         }
     }
 
@@ -135,18 +139,5 @@ public class RoomController {
         room.setLastModified(new Date());
         roomRepository.save(room);
         return "room_list";
-    }
-
-    class Geocoding {
-        List<AddressComponent> addressComponents;
-        String formattedAddress;
-        class AddressComponent {
-            String longName;
-            String shortName;
-            String[] types;
-        }
-        class Geometry {
-
-        }
     }
 }

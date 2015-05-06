@@ -41,10 +41,7 @@ idea {
 }
 
 dependencies {
-    runtime("mysql:mysql-connector-java:5.1.33")
-
-    compile 'commons-io:commons-io:2.4'
-    compile 'org.json:json:20141113'
+    runtime("mysql:mysql-connector-java:5.1.35")
 
     compile("org.springframework.boot:spring-boot-starter")
     compile("org.springframework.boot:spring-boot-starter-logging")
@@ -55,7 +52,6 @@ dependencies {
     compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-security")
-//    compile("org.flywaydb:flyway-core")
 
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 

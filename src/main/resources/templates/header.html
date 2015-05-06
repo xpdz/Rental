@@ -2,67 +2,57 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <body>
-  <nav class="navbar navbar-custom navbar-fixed-top" th:fragment="topNav">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">
-        <img src="/images/logo.png" th:alt="#{header.logo.hint}"/>
-      </a>
-    </div>
+  <div th:fragment="topNav">
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+            <img class="img-80x80" src="/images/logo.png" th:alt="#{header.logo.hint}"/>
+          </a>
+        </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <button type="button" class="btn btn-info navbar-btn" data-toggle="dropdown" aria-expanded="false"><span th:text="#{header.rooms}">Sebastian</span> <span class="caret"></span></button>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="/rooms" th:text="#{header.room.list}">Rooms list</a></li>
-            <li><a href="/rooms/form" th:text="#{header.room.post}">Post a room</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <button type="button" class="btn btn-info navbar-btn" data-toggle="dropdown" aria-expanded="false"><span th:text="#{header.wants}">Sebastian</span> <span class="caret"></span></button>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="/wants" th:text="#{header.want.list}">Wants list</a></li>
-            <li><a href="/wants/form" th:text="#{header.want.post}">Post a want</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form">
-        <div class="form-group" style="display:inline;">
-          <div class="input-group">
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#">Rooms</a></li>
-                <li><a href="#">Wants</a></li>
-              </ul>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="collapse-1">
+          <button type="button" class="btn btn-info navbar-btn navbar-left" th:text="#{header.room.post}">Post a room</button>
+          <button type="button" class="btn btn-info navbar-btn navbar-left" th:text="#{header.want.post}">Post a want</button>
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Rooms</a></li>
+                    <li><a href="#">Wants</a></li>
+                  </ul>
+                </div>
+                <input class="form-control" placeholder="What are searching for?" type="text" />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
+              </div>
             </div>
-            <input class="form-control" placeholder="What are searching for?" type="text" />
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
-          </div>
-        </div>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <div sec:authorize="isAuthenticated()">
-          <li class="dropdown active">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#" th:text="#{header.user.profile}">Profile</a></li>
-              <li><a href="index.htm">Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
-            </ul>
-          </li>
-        </div>
-        <div sec:authorize="isAnonymous()">
-          <a href="/login" th:text="#{header.login}">Login</a> / <a href="/signup" th:text="#{header.singup}">Sign up</a>
-        </div>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </nav>
+          </form>
+          <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()" property="principal.username">
+            <li class="dropdown active">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <img th:src="${#authentication.name}" /> <span th:text="${#authentication.name}"></span><span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#" th:text="#{header.user.profile}">Profile</a></li>
+                <li><a href="/logout">Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
+              </ul>
+            </li>
+          </ul>
+          <p class="navbar-text navbar-right" sec:authorize="isAnonymous()">
+            <a href="/login" th:text="#{header.login}">Login</a> / <a href="/signup" th:text="#{header.singup}">Sign up</a>
+          </p>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
+  </div>
 </body>
 </html>

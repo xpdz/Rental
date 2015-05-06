@@ -18,9 +18,8 @@ public class Room extends Post implements Serializable {
     private int totalMembers;
     private String utilities;
 
-    @OneToMany(fetch= FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "room_id", referencedColumnName="id")
-    private List<Photo> photos = new ArrayList<>(10);
+    @ElementCollection
+    private List<String> photoUri = new ArrayList<>(10);
 
     @OneToMany(fetch= FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "room_id", referencedColumnName="id")
@@ -106,12 +105,12 @@ public class Room extends Post implements Serializable {
         this.utilities = utilities;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
+    public List<String> getPhotoUri() {
+        return photoUri;
     }
 
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
+    public void setPhotoUri(List<String> photoUri) {
+        this.photoUri = photoUri;
     }
 
     public List<RoomComment> getRoomComments() {

@@ -22,6 +22,7 @@ public class Post {
     private Date endDate;
     private String roomType;
     private String gender;
+    @Column(length=1024)
     private String description;
 
     public double getLat() {
