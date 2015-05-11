@@ -141,49 +141,14 @@
                   <div class="col-md-2">
                     <span class="btn btn-default btn-file">
                       <span th:text="#{rooms.form.button.browse}">Browse</span>
-                      <input name="files[]" type="file" id="img-uploader1" />
+                      <input name="photoFiles[]" type="file" id="img-uploader" />
                     </span>
-                    </div>
-                    <div class="col-md-2">
-                    <span class="btn btn-default btn-file">
-                      <span th:text="#{rooms.form.button.browse}">Browse</span>
-                      <input name="files[]" type="file" id="img-uploader2" />
-                    </span>
-                    </div>
-                  <div class="col-md-2">
-                    <span class="btn btn-default btn-file">
-                      <span th:text="#{rooms.form.button.browse}">Browse</span>
-                      <input name="files[]" type="file" id="img-uploader3" />
-                    </span>
-                  </div>
-                  <div class="col-md-2">
-                    <span class="btn btn-default btn-file">
-                      <span th:text="#{rooms.form.button.browse}">Browse</span>
-                      <input name="files[]" type="file" id="img-uploader4" />
-                    </span>
-                  </div>
-                  <div class="col-md-2">
-                    <span class="btn btn-default btn-file">
-                      <span th:text="#{rooms.form.button.browse}">Browse</span>
-                      <input name="files[]" type="file" id="img-uploader5" />
-                    </span>
+                    <h5 th:text="#{rooms.form.photo.hint}">No more than 5, less than 8Mb each.</h5>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-2">
-                    <div id="img-previewer1"></div>
-                  </div>
-                  <div class="col-md-2">
-                    <div id="img-previewer2"></div>
-                  </div>
-                  <div class="col-md-2">
-                    <div id="img-previewer3"></div>
-                  </div>
-                  <div class="col-md-2">
-                    <div id="img-previewer4"></div>
-                  </div>
-                  <div class="col-md-2">
-                    <div id="img-previewer5"></div>
+                    <div id="img-previewer"></div>
                   </div>
                 </div>
               </div>
