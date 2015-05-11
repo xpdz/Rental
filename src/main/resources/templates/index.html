@@ -16,21 +16,30 @@
   <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="css/site.css"/>
+  <style>
+    html {
+      background: url('/images/background2.jpg') no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+  </style>
   <script>
     $(document).ready(function() {
       $('.navbar-form').hide();
+      $('nav').addClass('navbar-fixed-top');
     });
   </script>
 </head>
 <body>
-  <div class="bg"></div>
-
   <div th:include="header::topNav"></div>
+
   <div class="jumbotron vertical-center">
     <div class="container">
       <div class="row">
         <form role="form" th:action="@{/rooms}" method="get">
-          <div class="col-lg-6 col-lg-offset-2">
+          <div class="col-lg-6 col-lg-offset-3">
             <div class="input-group input-group-lg">
               <input type="text" name="searchBox" class="form-control" placeholder="City, State or ZIP" autofocus="true"/>
               <span class="input-group-btn" id="basic-addon1">

@@ -9,32 +9,6 @@
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css" />
   <link rel="stylesheet" href="/css/site.css" />
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('#startDate').datepicker({
-        format: "yyyymmdd",
-        clearBtn: true,
-        autoclose: true,
-        todayHighlight: true
-      });
-      $('#endDate').datepicker({
-        format: "yyyymmdd",
-        clearBtn: true,
-        autoclose: true,
-        todayHighlight: true
-      });
-    });
-  </script>
 </head>
 <body>
   <div th:include="header::topNav"></div>
@@ -44,30 +18,32 @@
       <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-info" >
           <div class="panel-heading">
-            <div class="panel-title" th:text="#{rooms.form.title}">Post a room</div>
+            <div class="panel-title" th:text="#{rooms.form.panel.heading.title}">Post a room</div>
           </div>
           <div class="panel-body">
-            <form action="/rooms" method="post">
+            <form action="/rooms" method="post" enctype="multipart/form-data">
               <div class="form-group">
-                <label for="roomTitle" th:text="rooms.form.post.title">Title</label>
+                <label for="roomTitle"  th:text="#{rooms.form.post.title }">Title</label>
                 <input type="text" class="form-control" id="roomTitle" name="title" required="true" placeholder="Enter title" />
               </div>
               <div class="form-group">
-                <label for="address" th:text="rooms.form.post.address">Address</label>
-                <input type="text" class="form-control" id="address" name="address" required="true" placeholder="Enter location" />
+                <label for="roomAddress"  th:text="#{rooms.form.post.address }">Address</label>
+                <input type="text" class="form-control" id="roomAddress" name="address" required="true" placeholder="Enter location" />
+                <input type="hidden" name="lat" id="lat" />
+                <input type="hidden" name="lng" id="lng" />
               </div>
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-4">
-                    <label for="roomPrice" th:text="rooms.form.post.price">Price</label>
+                    <label for="roomPrice"  th:text="#{rooms.form.post.price }">Price</label>
                     <input type="text" class="form-control" id="roomPrice" name="price" placeholder="Enter price" />
                   </div>
                   <div class="col-md-8">
-                    <label for="datepicker">Date</label>
+                    <label for="datepicker"  th:text="#{rooms.form.post.date }">Date</label>
                     <div class="input-daterange input-group" id="datepicker">
-                      <span class="input-group-addon" th:text="rooms.form.post.date.from">From</span>
+                      <span class="input-group-addon"  th:text="#{rooms.form.post.date.from }">From</span>
                       <input type="text" class="input-sm form-control" name="startDate" id="startDate"/>
-                      <span class="input-group-addon" th:text="rooms.form.post.date.to">To</span>
+                      <span class="input-group-addon"  th:text="#{rooms.form.post.date.to }">To</span>
                       <input type="text" class="input-sm form-control" name="endDate" id="endDate"/>
                     </div>
                   </div>
@@ -76,7 +52,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-4">
-                    <label for="roomType" th:text="rooms.form.post.property.type">Property Type</label>
+                    <label for="roomType"  th:text="#{rooms.form.post.property.type }">Property Type</label>
                     <select class="form-control" id="roomType" name="roomType" >
                       <option value=""></option>
                       <option value="0">Apartment</option>
@@ -87,7 +63,7 @@
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <label for="roomLessor" th:text="rooms.form.post.lessor.id">Lessor Identity</label>
+                    <label for="roomLessor"  th:text="#{rooms.form.post.lessor.id }">Lessor Identity</label>
                     <select class="form-control" id="roomLessor" name="lessorIdentity" >
                       <option value=""></option>
                       <option value="0">Roomate</option>
@@ -96,7 +72,7 @@
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <label for="roomTerm" th:text="rooms.form.post.term.lease">Term of Lease</label>
+                    <label for="roomTerm"  th:text="#{rooms.form.post.term.lease }">Term of Lease</label>
                     <select class="form-control" id="roomTerm" name="term" >
                       <option value=""></option>
                       <option value="0">12 months leases</option>
@@ -111,7 +87,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-4">
-                    <label for="room4Rent" th:text="rooms.form.post.room.rent">Room for Rent</label>
+                    <label for="room4Rent"  th:text="#{rooms.form.post.room.rent }">Room for Rent</label>
                     <select class="form-control" id="room4Rent" name="count" >
                       <option value=""></option>
                       <option value="0">Private Bedroom</option>
@@ -120,7 +96,7 @@
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <label for="gender" th:text="rooms.form.post.gender.prefer">Gender Prefer</label>
+                    <label for="gender"  th:text="#{rooms.form.post.gender.prefer }">Gender Prefer</label>
                     <select class="form-control" id="gender" name="gender" >
                       <option value="0">Either</option>
                       <option value="1">Male</option>
@@ -128,7 +104,7 @@
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <label for="petAllowed" th:text="rooms.form.post.allow.pet">Allow Pet</label>
+                    <label for="petAllowed"  th:text="#{rooms.form.post.allow.pet }">Allow Pet</label>
                     <select class="form-control" id="petAllowed" name="petAllowed" >
                       <option value="true">Yes</option>
                       <option value="false">No</option>
@@ -138,31 +114,82 @@
               </div>
               <div class="form-group">
                 <div class="row">
-                  <div class="col-md-3">
-                    <label for="bedroomCount" th:text="rooms.form.post.bedroom">Bedroom</label>
+                  <div class="col-md-2">
+                    <label for="bedroomCount"  th:text="#{rooms.form.post.bedroom }">Bedroom</label>
                     <input type="text" class="form-control" id="bedroomCount" name="bedroomCount" />
                   </div>
-                  <div class="col-md-3">
-                    <label for="bathroomCount" th:text="rooms.form.post.bathroom">Bathroom</label>
+                  <div class="col-md-2">
+                    <label for="bathroomCount"  th:text="#{rooms.form.post.bathroom }">Bathroom</label>
                     <input type="text" class="form-control" id="bathroomCount" name="bathroomCount" />
                   </div>
-                  <div class="col-md-3">
-                    <label for="livingRoomCount" th:text="rooms.form.post.livingroom">Living Room</label>
+                  <div class="col-md-2">
+                    <label for="livingRoomCount"  th:text="#{rooms.form.post.livingroom }">Living Room</label>
                     <input type="text" class="form-control" id="livingRoomCount" name="livingRoomCount" />
                   </div>
                   <div class="col-md-3">
-                    <label for="totalMembers" th:text="rooms.form.post.total.members">Total Members</label>
+                    <label for="totalMembers"  th:text="#{rooms.form.post.total.members }">Total Members</label>
                     <input type="text" class="form-control" id="totalMembers" name="totalMembers" />
                   </div>
                 </div>
               </div>
               <div class="form-group">
-                <label for="description" th:text="rooms.form.post.description">Description</label>
+                <label for="description"  th:text="#{rooms.form.post.description }">Description</label>
                 <textarea id="description" name="description" class="form-control" rows="5"></textarea>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-2">
+                    <span class="btn btn-default btn-file">
+                      <span th:text="#{rooms.form.button.browse}">Browse</span>
+                      <input name="files[]" type="file" id="img-uploader1" />
+                    </span>
+                    </div>
+                    <div class="col-md-2">
+                    <span class="btn btn-default btn-file">
+                      <span th:text="#{rooms.form.button.browse}">Browse</span>
+                      <input name="files[]" type="file" id="img-uploader2" />
+                    </span>
+                    </div>
+                  <div class="col-md-2">
+                    <span class="btn btn-default btn-file">
+                      <span th:text="#{rooms.form.button.browse}">Browse</span>
+                      <input name="files[]" type="file" id="img-uploader3" />
+                    </span>
+                  </div>
+                  <div class="col-md-2">
+                    <span class="btn btn-default btn-file">
+                      <span th:text="#{rooms.form.button.browse}">Browse</span>
+                      <input name="files[]" type="file" id="img-uploader4" />
+                    </span>
+                  </div>
+                  <div class="col-md-2">
+                    <span class="btn btn-default btn-file">
+                      <span th:text="#{rooms.form.button.browse}">Browse</span>
+                      <input name="files[]" type="file" id="img-uploader5" />
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    <div id="img-previewer1"></div>
+                  </div>
+                  <div class="col-md-2">
+                    <div id="img-previewer2"></div>
+                  </div>
+                  <div class="col-md-2">
+                    <div id="img-previewer3"></div>
+                  </div>
+                  <div class="col-md-2">
+                    <div id="img-previewer4"></div>
+                  </div>
+                  <div class="col-md-2">
+                    <div id="img-previewer5"></div>
+                  </div>
+                </div>
               </div>
               <div class="row top-buffer">
                 <div class="col-md-6 col-md-offset-3">
-                  <button type="submit" class="btn btn-primary btn-lg btn-block" th:text="rooms.form.post.button">Post</button>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block"  th:text="#{rooms.form.post.button }">Post</button>
                 </div>
               </div>
             </form>
@@ -172,5 +199,18 @@
     </div>
     <div th:include="footer::footer"></div>
   </div>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <script src="//maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+  <script src="/js/jQuery.MultiFile.min.js"></script>
+  <script src="/js/room_form.js"></script>
 </body>
 </html>

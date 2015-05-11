@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $('nav').removeClass('navbar-fixed-top');
   var mapOptions = {
     center: new google.maps.LatLng(37.564464, -122.422419),
     zoom: 16,

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <body>
   <div th:fragment="topNav">
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-custom">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-1">
@@ -19,8 +19,8 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="collapse-1">
-          <button type="button" class="btn btn-info navbar-btn navbar-left" th:text="#{header.room.post}">Post a room</button>
-          <button type="button" class="btn btn-info navbar-btn navbar-left" th:text="#{header.want.post}">Post a want</button>
+          <a role="button" class="btn btn-info navbar-btn navbar-left" href="/rooms/form" th:text="#{header.room.post}">Post a room</a>
+          <a role="button" class="btn btn-info navbar-btn navbar-left" href="/wants/form" th:text="#{header.want.post}">Post a want</a>
           <form class="navbar-form navbar-left">
             <div class="form-group">
               <div class="input-group">
@@ -36,10 +36,10 @@
               </div>
             </div>
           </form>
-          <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()" property="principal.username">
+          <ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
             <li class="dropdown active">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                <img th:src="${#authentication.name}" /> <span th:text="${#authentication.name}"></span><span class="caret"></span>
+                <img th:src="${'/images/'+#authentication.name+'/'+#authentication.name+'.png'}" /> <span th:text="${#authentication.name}"></span><span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#" th:text="#{header.user.profile}">Profile</a></li>

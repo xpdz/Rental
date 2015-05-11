@@ -11,24 +11,25 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import rental.domain.Account;
 import rental.domain.Room;
 import rental.service.AccountRepository;
 import rental.service.RoomRepository;
 
 import javax.validation.Valid;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -72,19 +73,46 @@ public class RoomController {
         return "room_list";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = "multipart/form-data")
     @Secured("ROLE_USER")
-    public String postRoom(@Valid @ModelAttribute Room room, BindingResult result, Model model, @AuthenticationPrincipal Account principal) {
+    public String postRoom(@Valid @ModelAttribute Room room, BindingResult result,
+                           Model model, @RequestParam("file") MultipartFile[] files) {
         if (result.hasErrors()) {
             return "room_form";
         }
 
         String username = ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        File userPhotoPath = new File(System.getProperty("user.home") + File.separator + "site_data"
+                + File.separator + "photos" + File.separator + username);
+        userPhotoPath.mkdirs();
+
+        List<String> photoUris = new ArrayList<>(5);
+
+        for (int i = 0; i < files.length; i++) {
+            File photoFile = new File(userPhotoPath, files[i].getOriginalFilename());
+            if (!files[i].isEmpty()) {
+                try {
+                    byte[] bytes = files[i].getBytes();
+                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(photoFile));
+                    stream.write(bytes);
+                    stream.close();
+                    photoUris.add("/photos/" + username + "/" + files[i].getOriginalFilename());
+                    logger.info("::: Post room, uploaded " + photoFile + "!");
+                } catch (Exception e) {
+                    logger.info("::: Post room upload error: " + photoFile + " => " + e.getMessage());
+                }
+            } else {
+                logger.info("::: Post room upload error: file " + files[i].getOriginalFilename() + " was empty.");
+            }
+        }
+
+        room.setPhotos(photoUris);
+
         Account account = accountRepository.findByUsername(username);
         logger.info(":::Post room, user=" + username);
         room.setAccountId(account.getId());
 
-        resolveGeocoding(room);
+//        resolveGeocoding(room);
 
         room.setLastModified(new Date());
         roomRepository.save(room);
@@ -139,5 +167,25 @@ public class RoomController {
         room.setLastModified(new Date());
         roomRepository.save(room);
         return "room_list";
+    }
+
+    @RequestMapping(value="/photo/upload", method=RequestMethod.POST)
+    public @ResponseBody
+    String handleFileUpload(@RequestParam("name") String name,
+                                                 @RequestParam("file") MultipartFile file){
+        if (!file.isEmpty()) {
+            try {
+                File photoFile = new File(name);
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(photoFile));
+                stream.write(bytes);
+                stream.close();
+                return "You successfully uploaded " + name + "!";
+            } catch (Exception e) {
+                return "You failed to upload " + name + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + name + " because the file was empty.";
+        }
     }
 }

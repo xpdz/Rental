@@ -19,7 +19,7 @@ public class Room extends Post implements Serializable {
     private String utilities;
 
     @ElementCollection
-    private List<String> photoUri = new ArrayList<>(10);
+    private List<String> photos = new ArrayList<>(10);
 
     @OneToMany(fetch= FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "room_id", referencedColumnName="id")
@@ -105,12 +105,12 @@ public class Room extends Post implements Serializable {
         this.utilities = utilities;
     }
 
-    public List<String> getPhotoUri() {
-        return photoUri;
+    public List<String> getPhotos() {
+        return photos;
     }
 
-    public void setPhotoUri(List<String> photoUri) {
-        this.photoUri = photoUri;
+    public void setPhotos(List<String> photos) {
+        this.photos = photos;
     }
 
     public List<RoomComment> getRoomComments() {

@@ -24,46 +24,12 @@
     body { height: 100%; margin: 0; padding: 0 }
     #map_canvas { height: 100% }
   </style>
-  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDLd19d6OTVijm6D6g7r2RgZ1lDNcNXOrQ&amp;sensor=false&amp;language=en"></script>
+  <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDLd19d6OTVijm6D6g7r2RgZ1lDNcNXOrQ&amp;sensor=false&amp;language=en"></script>
 </head>
-<body style="height:100%">
-<div class="container" style="height:100%">
+<body>
   <div th:include="header::topNav"></div>
 
-  <!--<div class="panel panel-default">-->
-    <!--<div class="panel-body">-->
-      <!--<div class="row">-->
-        <!--<form action="/rooms" method="get">-->
-          <!--<div class="col-md-3">-->
-            <!--<label for="state">State</label>-->
-            <!--<input type="text" class="form-control" id="state" placeholder="Enter state" />-->
-          <!--</div>-->
-          <!--<div class="col-md-3">-->
-            <!--<label for="price1">Price</label>-->
-            <!--<div class="row">-->
-              <!--<div class="col-md-5">-->
-                <!--<input type="text" class="form-control" id="price1" placeholder="Lowest" />-->
-              <!--</div>-->
-              <!--<div class="col-md-1">-</div>-->
-              <!--<div class="col-md-5">-->
-                <!--<input type="text" class="form-control" id="price2" placeholder="Highest" />-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="col-md-3">-->
-            <!--<label for="roomType">Type</label>-->
-            <!--<input type="text" class="form-control" id="roomType" placeholder="Enter room type" />-->
-          <!--</div>-->
-          <!--<div class="col-md-3">-->
-            <!--<button class="btn btn-primary" type="submit">-->
-              <!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
-            <!--</button>-->
-          <!--</div>-->
-        <!--</form>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-  <div class="container-fluid" id="main" style="height:100%">
+  <div class="container" style="height:100%">
     <div class="row">
       <div class="col-md-12">
         <h4>Search result match ...</h4>
@@ -108,7 +74,6 @@
     </div>
   </div>
 
-  <div th:include="footer::footer"></div>
-</div>
+<div th:include="footer::footer"></div>
 </body>
 </html>
