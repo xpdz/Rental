@@ -20,6 +20,7 @@
   <script src="js/room_list.js"></script>
 
   <style type="text/css">
+    tr { cursor: pointer; }
     html { height: 100% }
     body { height: 100%; margin: 0; padding: 0 }
     #map_canvas { height: 100% }
@@ -39,7 +40,7 @@
       <div class="col-md-4">
         <table class="table table-hover">
           <tbody>
-          <tr th:each="room : ${rooms}">
+          <tr th:each="room : ${rooms}" th:id="${room.id}">
             <td th:text="${room.title}"></td>
             <td th:text="'$' + ${room.price}"></td>
             <td>&nbsp;</td>

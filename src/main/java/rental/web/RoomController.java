@@ -120,24 +120,4 @@ public class RoomController {
         roomRepository.save(room);
         return "room_list";
     }
-
-    @RequestMapping(value="/photo/upload", method=RequestMethod.POST)
-    public @ResponseBody
-    String handleFileUpload(@RequestParam("name") String name,
-                                                 @RequestParam("file") MultipartFile file){
-        if (!file.isEmpty()) {
-            try {
-                File photoFile = new File(name);
-                byte[] bytes = file.getBytes();
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(photoFile));
-                stream.write(bytes);
-                stream.close();
-                return "You successfully uploaded " + name + "!";
-            } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
-            }
-        } else {
-            return "You failed to upload " + name + " because the file was empty.";
-        }
-    }
 }

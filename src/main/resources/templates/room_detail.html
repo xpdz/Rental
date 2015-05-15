@@ -1,0 +1,125 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="#{room.detail.title}">Room detail</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/css/site.css" />
+  <link rel="stylesheet" href="/css/unslider.css" />
+</head>
+<body>
+  <div th:include="header::topNav"></div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="panel panel-info" >
+          <div class="panel-heading">
+            <div class="panel-title" th:text="#{room.detail.title}">Post a room</div>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <table class="table table-hover">
+                  <tbody>
+                  <tr>
+                    <td th:text="#{rooms.form.post.room.rent}"></td>
+                    <td th:text="${room.count}"></td>
+                  </tr>
+                  <tr>
+                    <td th:text="#{price}"></td>
+                    <td th:text="${room.price}"></td>
+                  </tr>
+                  <tr>
+                    <td th:text="#{gender}"></td>
+                    <td th:text="${room.gender}"></td>
+                  </tr>
+                  <tr>
+                    <td th:text="#{rooms.form.post.allow.pet}"></td>
+                    <td th:text="${room.petAllowed}"></td>
+                  </tr>
+                  <tr>
+                    <td th:text="#{rooms.form.post.lessor.id}"></td>
+                    <td th:text="${room.lessorIdentity}"></td>
+                  </tr>
+                  <tr>
+                    <td th:text="#{rooms.form.post.property.type}"></td>
+                    <td th:text="${room.roomType}"></td>
+                  </tr>
+                  <tr>
+                    <td th:text="#{rooms.form.post.room.rent}"></td>
+                    <td th:text="${room.bedroomCount}"></td>
+                  </tr>
+                  <tr>
+                    <td th:text="#{from}"></td>
+                    <td th:text="${room.startDate}"></td>
+                  </tr>
+                  <tr>
+                    <td th:text="#{to}"></td>
+                    <td th:text="${room.endDate}"></td>
+                  </tr>
+                  <tr>
+                    <td th:text="#{rooms.form.post.term.lease}"></td>
+                    <td th:text="${room.term}"></td>
+                  </tr>
+                  <tr>
+                    <td th:text="#{rooms.form.post.room.rent}"></td>
+                    <td th:text="${room.term}"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-6">
+                <div class="banner">
+                  <a href="#" class="unslider-arrow prev">Previous</a>
+                  <a href="#" class="unslider-arrow next">Next</a>
+                  <ul>
+                    <li style="background-image: url('img/sunset.jpg');">photo 1</li>
+                    <li style="background-image: url('img/sunset.jpg');">photo 2</li>
+                    <li style="background-image: url('img/sunset.jpg');">photo 3</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel panel-info" >
+          <div class="panel-heading">
+            <div class="panel-title" th:text="#{room.detail.user}">Post a room</div>
+          </div>
+          <div class="panel-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:include="footer::footer"></div>
+  </div>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <script src="//maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="//unslider.com/unslider.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.banner').unslider();
+    });
+    $('.unslider-arrow').click(function() {
+        var fn = this.className.split(' ')[1];
+        //  Either do unslider.data('unslider').next() or .prev() depending on the className
+        unslider.data('unslider')[fn]();
+    });
+  </script>
+</body>
+</html>

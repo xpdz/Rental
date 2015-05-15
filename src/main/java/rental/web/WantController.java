@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import rental.service.AccountRepository;
 import rental.service.WantRepository;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +38,12 @@ public class WantController {
     @RequestMapping(method = RequestMethod.GET)
     public String listWants(Model model) {
         List<Want> wants = wantRepository.findAll();
+        // get the owner of want
+        List<Long> ids = new ArrayList<>(wants.size());
+        for (Want want : wants) {
+            Account account = accountRepository.findOne(want.getAccountId());
+            want.setAccount(account);
+        }
         model.addAttribute("wants", wants);
         return "want_list";
     }
@@ -66,11 +75,12 @@ public class WantController {
             return "want_form";
         }
 
-//        Account account = accountRepository.findByUsername(principal.getUsername());
-//        want.setAccountId(account.getId());
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        Account account = accountRepository.findByUsername(username);
+        want.setAccountId(account.getId());
         want.setLastModified(new Date());
         wantRepository.save(want);
-        return "want_list";
+        return "redirect:/wants";
     }
 
     @RequestMapping(value = "/{want}", method = RequestMethod.PUT)

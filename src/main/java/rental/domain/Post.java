@@ -12,6 +12,8 @@ public class Post {
     @GeneratedValue
     private Long id;
 
+    @Transient
+    private Account account;
     private long accountId;
     private Date lastModified;
     private String address;
@@ -24,6 +26,14 @@ public class Post {
     private String gender;
     @Column(length=1024)
     private String description;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public double getLat() {
         return lat;

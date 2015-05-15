@@ -7,28 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css" />
   <link rel="stylesheet" href="/css/site.css" />
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('#datepicker').datepicker({
-        format: "yyyymmdd",
-        clearBtn: true,
-        autoclose: true,
-        todayHighlight: true
-      });
-    });
-  </script>
 </head>
 <body>
   <div th:include="header::topNav"></div>
@@ -38,27 +19,29 @@
       <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-info" >
           <div class="panel-heading">
-            <div class="panel-title">Post a want</div>
+            <div class="panel-title" th:text="#{wants.form.panel.heading.title}">Post a want</div>
           </div>
           <div class="panel-body">
             <form action="/wants" method="post">
               <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address" required="true" placeholder="Enter location" />
+                <label for="wantAddress" th:text="#{address}">Address</label>
+                <input type="text" class="form-control" id="wantAddress" name="address" required="true" />
+                <input type="hidden" name="lat" id="lat" />
+                <input type="hidden" name="lng" id="lng" />
               </div>
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-4">
-                    <label for="wantPrice">Price</label>
-                    <input type="text" class="form-control" id="wantPrice" name="price" placeholder="Enter price" />
+                    <label for="wantPrice" th:text="#{price}">Price</label>
+                    <input type="text" class="form-control" id="wantPrice" name="price" />
                   </div>
                   <div class="col-md-8">
-                    <label for="datepicker">Date</label>
+                    <label for="datepicker" th:text="#{date}">Date</label>
                     <div class="input-daterange input-group" id="datepicker">
-                      <span class="input-group-addon">From</span>
-                      <input type="text" class="input-sm form-control" name="startDate" />
-                      <span class="input-group-addon">To</span>
-                      <input type="text" class="input-sm form-control" name="endDate" />
+                      <span class="input-group-addon" th:text="#{from}">From</span>
+                      <input type="text" class="input-sm form-control" name="startDate" id="startDate" />
+                      <span class="input-group-addon" th:text="#{to}">To</span>
+                      <input type="text" class="input-sm form-control" name="endDate" id="endDate" />
                     </div>
                   </div>
                 </div>
@@ -66,7 +49,7 @@
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-4">
-                    <label for="roomType">Property Type</label>
+                    <label for="roomType" th:text="#{rooms.form.post.property.type}">Property Type</label>
                     <select class="form-control" id="roomType" name="roomType" >
                       <option value=""></option>
                       <option value="0">Apartment</option>
@@ -77,7 +60,7 @@
                     </select>
                   </div>
                   <div class="col-md-4">
-                    <label for="gender">Gender</label>
+                    <label for="gender" th:text="#{gender}">Gender</label>
                     <select class="form-control" id="gender" name="gender" >
                       <option value="0">Male</option>
                       <option value="1">Female</option>
@@ -86,12 +69,12 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="description">Description</label>
+                <label for="description" th:text="#{description}">Description</label>
                 <textarea id="description" name="description" class="form-control" rows="5"></textarea>
               </div>
               <div class="row top-buffer">
                 <div class="col-md-6 col-md-offset-3">
-                  <button type="submit" class="btn btn-primary btn-lg btn-block">Post</button>
+                  <button type="submit" class="btn btn-info btn-lg btn-block" th:text="#{post}">Post</button>
                 </div>
               </div>
             </form>
@@ -101,5 +84,41 @@
     </div>
     <div th:include="footer::footer"></div>
   </div>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+  <script src="//maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <script>
+    $(document).ready(function() {
+      // init date picker
+      $('#startDate').datepicker({
+        format: "yyyymmdd",
+        clearBtn: true,
+        autoclose: true,
+        todayHighlight: true
+      });
+      $('#endDate').datepicker({
+        format: "yyyymmdd",
+        clearBtn: true,
+        autoclose: true,
+        todayHighlight: true
+      });
+
+      // init address suggestion with google maps API
+      var autocomplete = new google.maps.places.Autocomplete((document.getElementById('wantAddress')), { types: ['geocode'] });
+      google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var latlng = autocomplete.getPlace().geometry.location;
+        $('#lat').val(latlng.lat());
+        $('#lng').val(latlng.lng());
+      });
+    });
+  </script>
 </body>
 </html>

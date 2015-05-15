@@ -14,14 +14,13 @@ public class Account implements Serializable {
     private String password;
     private boolean enabled;
 
-    @Lob
-    private byte[] avatar;
+    private String avatar;
 
-    public byte[] getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 

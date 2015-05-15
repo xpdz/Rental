@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
-  <link rel="stylesheet" href="css/site.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/css/site.css" />
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -25,10 +26,10 @@
     <div class="row">
       <div class="col-md-8 col-md-offsets-4">
         <div class="row" th:each="want : ${wants}">
-          <div class="panel panel-default">
+          <div class="panel panel-info">
             <div class="panel-heading">
               <div class="row">
-                <div class="col-md-3" th:text="${want.accountId}"></div>
+                <div class="col-md-3" th:text="${want.account.username}"></div>
                 <h5 class="col-md-3 col-md-offset-6" th:text="${want.lastModified}"></h5>
               </div>
             </div>
