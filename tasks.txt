@@ -1,0 +1,22 @@
+sort all of the TODOs, give the priority and time.
+
+backlog:
+x) room detail page - 5h
+2) room list - filters (backend & frontend) - 5h
+3) room list - room list table paging - 2h
+6) room form - input refactor, validate & error display - 5h
+9) 3-party login - 5h
+10) login page refactor & signup redirect - 3h
+11) user profile - 5h
+12) post / want comment - 5h
+
+working:
+
+done:
+1) header navbar - 3h
+4) room list - desc panel, img, addr, desc - 3h
+13) room form img upload - 2h
+ii) addr hint - 3h
+5) room list - map - 1h
+8) want form - 3h
+7) want list - 5h
