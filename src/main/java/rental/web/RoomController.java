@@ -36,8 +36,8 @@ public class RoomController {
     private AccountRepository accountRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String listRooms(Model model) {
-        List<Room> rooms = roomRepository.findAll();
+    public String listRooms(@RequestParam(value="searchBox") String addr, Model model) {
+        List<Room> rooms = roomRepository.findByAddressContaining(addr);
         model.addAttribute("rooms", rooms);
         logger.info(":::Find all rooms, size="+rooms.size());
         return "room_list";
