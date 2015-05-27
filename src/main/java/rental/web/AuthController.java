@@ -24,7 +24,7 @@ public class AuthController {
     @Autowired
     private RoleRepository roleRepository;
 
-    @RequestMapping(value="/login")
+    @RequestMapping(value={"/login", "/signin"})
     public String loginForm(Model model) {
         return "login";
     }
