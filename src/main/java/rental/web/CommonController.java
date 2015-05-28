@@ -9,9 +9,9 @@ public class CommonController {
     public String index() {
         return "index";
     }
-
-    @RequestMapping(value="/error")
-    public String error() {
-        return "error";
-    }
+//
+//    @RequestMapping(value="/error")
+//    public String error() {
+//        return "error";
+//    }
 }
