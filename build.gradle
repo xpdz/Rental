@@ -43,19 +43,24 @@ idea {
 dependencies {
     runtime("mysql:mysql-connector-java:5.1.35")
 
-    compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
-
     compile("org.springframework.boot:spring-boot-starter")
     compile("org.springframework.boot:spring-boot-starter-logging")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-security")
-    compile("org.springframework.social:spring-social-security")
+    compile("org.springframework.boot:spring-boot-starter-social-facebook")
+
+    compile("org.springframework.social:spring-social-config")
+    compile("org.springframework.social:spring-social-core")
     compile("org.springframework.social:spring-social-facebook")
+    compile("org.springframework.social:spring-social-facebook-web")
+    compile("org.springframework.social:spring-social-security")
+    compile("org.springframework.social:spring-social-web")
 
     compile("org.thymeleaf:thymeleaf-spring4")
     compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity3")
+    compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
 
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 

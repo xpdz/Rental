@@ -96,5 +96,7 @@
     <orderEntry type="library" exported="" name="Gradle: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework.social:spring-social-security:1.1.0.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework.boot:spring-boot-starter-social-facebook:1.2.3.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.springframework.social:spring-social-facebook-web:1.1.1.RELEASE" level="project" />
   </component>
 </module>
