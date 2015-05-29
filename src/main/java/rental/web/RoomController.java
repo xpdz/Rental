@@ -3,6 +3,10 @@ package rental.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,10 +40,24 @@ public class RoomController {
     private AccountRepository accountRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String listRooms(@RequestParam(value="searchBox") String addr, Model model) {
-        List<Room> rooms = roomRepository.findByAddressContaining(addr);
-        model.addAttribute("rooms", rooms);
-        logger.info(":::Find all rooms, size="+rooms.size());
+    public String listRooms(@RequestParam(value="searchBox") String addr,
+                            @RequestParam(value="pages", required = false) Integer pageNum, Model model) {
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        Pageable pageRequest = new PageRequest(pageNum - 1, 10, Sort.Direction.DESC, "lastModified");
+        Page<Room> page = roomRepository.findByAddressContaining(addr, pageRequest);
+        int current = page.getNumber() + 1;
+        int begin = Math.max(1, current - 5);
+        int end = Math.min(begin + 10, page.getTotalPages());
+
+        model.addAttribute("rooms", page);
+        model.addAttribute("beginIndex", begin);
+        model.addAttribute("endIndex", end);
+        model.addAttribute("currentIndex", current);
+        model.addAttribute("searchText", addr);
+        logger.info(":::Find rooms - addr: " + addr + ", page begin: " + begin + ", end: " + end + ", current: " + current
+                + ", total pages=" + page.getTotalPages() + ", total elements: " + page.getTotalElements());
         return "room_list";
     }
 

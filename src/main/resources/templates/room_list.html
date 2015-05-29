@@ -33,7 +33,7 @@
   <div class="container" style="height:100%">
     <div class="row">
       <div class="col-md-12">
-        <h4>Search result match ...</h4>
+        <h4 th:text="${searchText}"></h4>
       </div>
     </div>
     <div class="row" style="height:100%">
@@ -51,6 +51,23 @@
           </tr>
           </tbody>
         </table>
+        <nav>
+          <ul class="pagination">
+            <li>
+              <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(beginIndex, endIndex)}">
+              <a th:href="@{'/rooms?searchBox='+${searchText}+'&amp;pages='+i}" th:text="${i}"></a>
+            </li>
+            <li>
+              <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
       <div class="col-md-8" style="height:100%">
         <div class="row" style="height:100%">
@@ -67,7 +84,7 @@
                 <img src="http://placehold.it/80x80" class="img-resize" style="display: none" />
                 <img src="http://placehold.it/80x80" class="img-resize" style="display: none" />
               </div>
-              <div class="row"><h5 id="roomDesc"></h5></div>
+              <div class="row"><p><pre id="roomDesc"></pre></p></div>
             </div>
           </div>
         </div>

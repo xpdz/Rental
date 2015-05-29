@@ -1,7 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title th:text="#{wants.title}">Wants</title>
+  <title th:text="#{error.title}">Error</title>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,12 +19,11 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div th:include="header::topNav"></div>
 <div class="container">
-  <div th:include="header::topNav"></div>
-
   <div class="container">
     <div class="row">
-      <h3 th:text="error.text"></h3>
+      <h3 th:text="#{error.text}"></h3>
     </div>
   </div>
 
