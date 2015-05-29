@@ -49,7 +49,7 @@ public class RoomController {
         Page<Room> page = roomRepository.findByAddressContaining(addr, pageRequest);
         int current = page.getNumber() + 1;
         int begin = Math.max(1, current - 5);
-        int end = Math.min(begin + 10, page.getTotalPages());
+        int end = Math.min(begin + 5, page.getTotalPages());
 
         model.addAttribute("rooms", page);
         model.addAttribute("beginIndex", begin);
